@@ -65,83 +65,82 @@ const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: '#aec3bc',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Container maxWidth='sm'>
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component='h1' variant='h5' gutterBottom>
-            Log In
-          </Typography>
-          <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id='userName'
-                  name='userName'
-                  label='Username'
-                  type='text'
-                  value={formData.userName}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id='Email'
-                  name='Email'
-                  label='Email'
-                  type='email'
-                  value={formData.Email}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id='Password'
-                  name='Password'
-                  label='Password'
-                  type='password'
-                  value={formData.Password}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
+    // <Box
+    //   sx={{
+    //     backgroundColor: '#e6edeb',
+    //     minHeight: '100vh',
+    //     display: 'flex',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //   }}
+    // >
+    <Container maxWidth='sm'>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component='h1' variant='h5' gutterBottom>
+          Log In
+        </Typography>
+        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id='userName'
+                name='userName'
+                label='Username'
+                type='text'
+                value={formData.userName}
+                onChange={handleChange}
+                required
+              />
             </Grid>
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{
-                mt: 3,
-                mb: 2,
-                backgroundColor: '#2c4e51',
-                '&:hover': { backgroundColor: '#2c3e50' },
-              }}
-            >
-              Log In
-            </Button>
-          </Box>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id='Email'
+                name='Email'
+                label='Email'
+                type='email'
+                value={formData.Email}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                id='Password'
+                name='Password'
+                label='Password'
+                type='password'
+                value={formData.Password}
+                onChange={handleChange}
+                required
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type='submit'
+            fullWidth
+            variant='contained'
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: '#2c4e51',
+              '&:hover': { backgroundColor: '#2c3e50' },
+            }}
+          >
+            Log In
+          </Button>
         </Box>
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 };
 
