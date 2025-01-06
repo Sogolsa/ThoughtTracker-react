@@ -61,7 +61,7 @@ const NavigationBar = ({ userId, onLogout }) => {
           <MenuIcon />
         </IconButton>
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <Button color='inherit' component={Link} to={`/user/${userId}`}>
+          <Button color='inherit' component={Link} to={`/users/${userId}`}>
             Profile
           </Button>
           <Button color='inherit' component={Link} to='/thoughts'>

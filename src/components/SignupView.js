@@ -120,6 +120,22 @@ const SignupView = () => {
           >
             Sign Up
           </Button>
+          <Button
+            fullWidth
+            variant='outlined'
+            onClick={() => navigate('/')}
+            sx={{
+              mb: 2,
+              borderColor: '#2c4e51',
+              color: '#2c4e51',
+              '&:hover': {
+                borderColor: '#2c3e50',
+                backgroundColor: 'rgba(44, 62, 80, 0.1)',
+              },
+            }}
+          >
+            Home
+          </Button>
         </Box>
       </Box>
     </Container>

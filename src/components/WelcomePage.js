@@ -45,6 +45,9 @@ const WelcomePage = () => {
           padding: 3,
         }}
       >
+        <Typography variant='h3' component='h1' gutterBottom>
+          Easier Way to Journaling!
+        </Typography>
         <Typography variant='h4' component='h1' gutterBottom>
           Welcome to Thought Tracker
         </Typography>
