@@ -10,6 +10,7 @@ import {
   CardActions,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 const ThoughtsView = ({ token, thoughts, setThoughts }) => {
   const [newThought, setNewThought] = useState(''); // New thought name
@@ -77,7 +78,15 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       </Typography>
 
       {/* Form to add a new thought */}
-      <Card sx={{ mb: 3, padding: 2 }}>
+      <Card
+        sx={{
+          mb: 3,
+          padding: 2,
+          backgroundColor: 'white',
+          boxShadow: 'none',
+          border: '1px solid #C8E6C9',
+        }}
+      >
         <Typography variant='h6' gutterBottom>
           Add a New Thought
         </Typography>
@@ -114,7 +123,17 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       {thoughts.length > 0 ? (
         <List>
           {thoughts.map((thought) => (
-            <Card key={thought._id} sx={{ mb: 2 }}>
+            <Card
+              key={thought._id}
+              sx={{
+                mb: 2,
+                // backgroundColor: '#E8F5E9',
+                backgroundColor: 'white',
+                padding: 2,
+                boxShadow: 'none',
+                border: '1px solid #C8E6C9',
+              }}
+            >
               <CardContent>
                 <Typography variant='h6'>{thought.thoughtName}</Typography>
                 <Typography variant='body2' color='textSecondary'>

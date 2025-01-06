@@ -8,6 +8,7 @@ import WelcomePage from './WelcomePage';
 import LoginView from './LoginView';
 import ThoughtsView from './ThoughtsView';
 import ThoughtDetails from './ThoughtDetails';
+import ProfileView from './ProfileView';
 
 const Home = () => {
   const storedUser = localStorage.getItem('user');
@@ -41,7 +42,14 @@ const Home = () => {
           }
         />
         <Route path='/signup' element={<SignupView setUser={setUser} />} />
-        <Route path='/thoughts/:thoughtId' element={<ThoughtDetails />} />
+        <Route
+          path='/thoughts/:thoughtId'
+          element={<ThoughtDetails token={token} />}
+        />
+        <Route
+          path='/users/me'
+          element={<ProfileView token={token} user={user} setUser={setUser} />}
+        />
 
         <Route
           path='/login'

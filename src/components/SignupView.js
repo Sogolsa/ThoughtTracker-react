@@ -68,74 +68,83 @@ const SignupView = () => {
         <Typography component='h1' variant='h5' gutterBottom>
           Sign Up
         </Typography>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id='userName'
-                name='userName'
-                label='Username'
-                value={formData.userName}
-                onChange={handleChange}
-                required
-              />
+        <Box
+          sx={{
+            backgroundColor: '#fff',
+            padding: 4,
+            borderRadius: 2,
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id='userName'
+                  name='userName'
+                  label='Username'
+                  value={formData.userName}
+                  onChange={handleChange}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id='Email'
+                  name='Email'
+                  label='Email'
+                  type='email'
+                  value={formData.Email}
+                  onChange={handleChange}
+                  required
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  id='Password'
+                  name='Password'
+                  label='Password'
+                  type='password'
+                  value={formData.Password}
+                  onChange={handleChange}
+                  required
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id='Email'
-                name='Email'
-                label='Email'
-                type='email'
-                value={formData.Email}
-                onChange={handleChange}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id='Password'
-                name='Password'
-                label='Password'
-                type='password'
-                value={formData.Password}
-                onChange={handleChange}
-                required
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            sx={{
-              mt: 3,
-              mb: 2,
-              backgroundColor: '#2c4e51',
-              '&:hover': { backgroundColor: '#2c3e50' },
-            }}
-          >
-            Sign Up
-          </Button>
-          <Button
-            fullWidth
-            variant='outlined'
-            onClick={() => navigate('/')}
-            sx={{
-              mb: 2,
-              borderColor: '#2c4e51',
-              color: '#2c4e51',
-              '&:hover': {
-                borderColor: '#2c3e50',
-                backgroundColor: 'rgba(44, 62, 80, 0.1)',
-              },
-            }}
-          >
-            Home
-          </Button>
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              color='primary'
+              sx={{
+                mt: 3,
+                mb: 2,
+                backgroundColor: '#2c4e51',
+                '&:hover': { backgroundColor: '#2c3e50' },
+              }}
+            >
+              Sign Up
+            </Button>
+            <Button
+              fullWidth
+              variant='outlined'
+              onClick={() => navigate('/')}
+              sx={{
+                mb: 2,
+                borderColor: '#2c4e51',
+                color: '#2c4e51',
+                '&:hover': {
+                  borderColor: '#2c3e50',
+                  backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                },
+              }}
+            >
+              Home
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Container>

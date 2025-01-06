@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 
-const ThoughtDetails = () => {
+const ThoughtDetails = ({ token }) => {
   const { thoughtId } = useParams();
   const navigate = useNavigate();
   const [thought, setThought] = useState(null);
@@ -13,7 +13,6 @@ const ThoughtDetails = () => {
     possibleSolutions: [],
     Affirmation: '',
   });
-  const token = localStorage.getItem('token'); // Get token from localStorage
 
   useEffect(() => {
     // Fetch thought details
@@ -117,75 +116,94 @@ const ThoughtDetails = () => {
       </Typography>
 
       {/* Display the thought name and created date */}
-      <Box sx={{ mb: 3 }}>
-        <Typography variant='h6'>
-          Thought Name: {thought.thoughtName}
-        </Typography>
-        <Typography variant='body2' color='textSecondary'>
-          Created on: {new Date(thought.created_date).toLocaleString()}
-        </Typography>
-      </Box>
+      <Box
+        sx={{
+          backgroundColor: '#fff',
+          padding: 4,
+          borderRadius: 2,
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <Box sx={{ mb: 3 }}>
+          <Typography variant='h6'>
+            Thought Name: {thought.thoughtName}
+          </Typography>
+          <Typography variant='body2' color='textSecondary'>
+            Created on: {new Date(thought.created_date).toLocaleString()}
+          </Typography>
+        </Box>
 
-      {/* Form for updating thought details */}
-      <Box component='form' onSubmit={handleUpdate}>
-        <TextField
-          fullWidth
-          label='Description'
-          name='Description'
-          value={formData.Description}
-          onChange={handleChange}
-          margin='normal'
-        />
-        <TextField
-          fullWidth
-          label='Emotions'
-          name='Emotions'
-          value={formData.Emotions}
-          onChange={handleChange}
-          margin='normal'
-        />
-        <TextField
-          fullWidth
-          label='Problems'
-          name='Problems'
-          value={formData.Problems}
-          onChange={handleChange}
-          margin='normal'
-        />
-        <TextField
-          fullWidth
-          label='Possible Solutions'
-          name='possibleSolutions'
-          value={formData.possibleSolutions}
-          onChange={handleChange}
-          margin='normal'
-        />
-        <TextField
-          fullWidth
-          label='Affirmation'
-          name='Affirmation'
-          value={formData.Affirmation}
-          onChange={handleChange}
-          margin='normal'
-        />
+        {/* Form for updating thought details */}
+        <Box component='form' onSubmit={handleUpdate}>
+          <TextField
+            fullWidth
+            label='Description'
+            name='Description'
+            value={formData.Description}
+            multiline
+            // minRows={10}
+            onChange={handleChange}
+            margin='normal'
+          />
+          <TextField
+            fullWidth
+            label='Emotions'
+            name='Emotions'
+            value={formData.Emotions}
+            onChange={handleChange}
+            margin='normal'
+            multiline
+          />
+          <TextField
+            fullWidth
+            label='Problems'
+            name='Problems'
+            value={formData.Problems}
+            onChange={handleChange}
+            margin='normal'
+            multiline
+          />
+          <TextField
+            fullWidth
+            label='Possible Solutions'
+            name='possibleSolutions'
+            value={formData.possibleSolutions}
+            onChange={handleChange}
+            margin='normal'
+            multiline
+          />
+          <TextField
+            fullWidth
+            label='Affirmation'
+            name='Affirmation'
+            value={formData.Affirmation}
+            onChange={handleChange}
+            margin='normal'
+            multiline
+          />
 
-        {/* Buttons for updating and deleting */}
-        <Button
-          type='submit'
-          variant='contained'
-          color='primary'
-          sx={{ mt: 2 }}
-        >
-          Update Thought
-        </Button>
-        <Button
-          variant='outlined'
-          color='error'
-          sx={{ mt: 2, ml: 2 }}
-          onClick={handleDelete}
-        >
-          Delete Thought
-        </Button>
+          {/* Buttons for updating and deleting */}
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            sx={{
+              mt: 2,
+              backgroundColor: '#2c4e51',
+              '&:hover': { backgroundColor: '#2c3e50' },
+            }}
+          >
+            Update Thought
+          </Button>
+          <Button
+            variant='outlined'
+            color='error'
+            sx={{ mt: 2, ml: 2 }}
+            onClick={handleDelete}
+          >
+            Delete Thought
+          </Button>
+        </Box>
       </Box>
     </Container>
   );
