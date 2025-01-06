@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  Grid,
+} from '@mui/material';
 
 const ProfileView = ({ user, setUser, token }) => {
   const [formData, setFormData] = useState({
@@ -115,8 +122,8 @@ const ProfileView = ({ user, setUser, token }) => {
   if (!user) return <Typography>Loading...</Typography>;
 
   return (
-    <Container>
-      <Typography variant='h4' gutterBottom>
+    <Container maxWidth='sm' sx={{ textAlign: 'center' }}>
+      <Typography variant='h4' sx={{ mt: 3 }} gutterBottom>
         Profile
       </Typography>
       <Box
@@ -155,26 +162,36 @@ const ProfileView = ({ user, setUser, token }) => {
             margin='normal'
             type='password'
           />
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            sx={{
-              mt: 2,
-              backgroundColor: '#2c4e51',
-              '&:hover': { backgroundColor: '#2c3e50' },
-            }}
+          <Grid
+            container
+            spacing={1}
+            sx={{ mt: 2, justifyContent: 'flex-end' }}
           >
-            Update Profile
-          </Button>
-          <Button
-            variant='outlined'
-            color='error'
-            sx={{ mt: 2, ml: 2 }}
-            onClick={handleDelete}
-          >
-            Delete Account
-          </Button>
+            <Grid item>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+                sx={{
+                  mt: 2,
+                  backgroundColor: '#2c4e51',
+                  '&:hover': { backgroundColor: '#2c3e50' },
+                }}
+              >
+                Update Profile
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant='outlined'
+                color='error'
+                sx={{ mt: 2 }}
+                onClick={handleDelete}
+              >
+                Delete Account
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>

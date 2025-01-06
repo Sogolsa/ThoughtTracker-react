@@ -11,11 +11,14 @@ import {
   ListItem,
   ListItemText,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const NavigationBar = ({ userId, onLogout }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   const navigate = useNavigate();
 
@@ -46,9 +49,14 @@ const NavigationBar = ({ userId, onLogout }) => {
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           <Link
             to='/thoughts'
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+              fontWeight: 'bold',
+            }}
           >
-            Thought Tracker
+            <span style={{ color: 'white' }}>Thought</span>{' '}
+            <span style={{ color: 'salmon' }}>Tracker</span>{' '}
           </Link>
         </Typography>
         {/* Hamburger menu for mobile */}
@@ -61,11 +69,27 @@ const NavigationBar = ({ userId, onLogout }) => {
           <MenuIcon />
         </IconButton>
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <Button color='inherit' component={Link} to={'/users/me'}>
-            Profile
-          </Button>
-          <Button color='inherit' component={Link} to='/thoughts'>
+          <Button
+            color='inherit'
+            component={Link}
+            to='/thoughts'
+            sx={{
+              fontWeight: isActive('/thoughts') ? 'bold' : 'normal',
+              borderBottom: isActive('/thoughts') ? '2px solid salmon' : 'none',
+            }}
+          >
             Thoughts
+          </Button>
+          <Button
+            color='inherit'
+            component={Link}
+            to={'/users/me'}
+            sx={{
+              fontWeight: isActive('/users/me') ? 'bold' : 'normal',
+              borderBottom: isActive('/users/me') ? '2px solid salmon' : 'none',
+            }}
+          >
+            Profile
           </Button>
           <Button color='inherit' onClick={handleLogout}>
             Logout

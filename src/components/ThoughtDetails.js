@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { TextField, Button, Container, Typography, Box } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  Box,
+  Grid,
+} from '@mui/material';
 
 const ThoughtDetails = ({ token }) => {
   const { thoughtId } = useParams();
@@ -110,8 +117,8 @@ const ThoughtDetails = ({ token }) => {
   if (!thought) return <Typography>Loading...</Typography>;
 
   return (
-    <Container>
-      <Typography variant='h4' gutterBottom>
+    <Container maxWidth='md' sx={{ textAlign: 'center' }}>
+      <Typography variant='h4' sx={{ mt: 3 }} gutterBottom>
         Thought Details
       </Typography>
 
@@ -135,6 +142,15 @@ const ThoughtDetails = ({ token }) => {
 
         {/* Form for updating thought details */}
         <Box component='form' onSubmit={handleUpdate}>
+          <TextField
+            fullWidth
+            label='Edit Thought Name'
+            name='thoughtName'
+            value={formData.thoughtName}
+            multiline
+            onChange={handleChange}
+            margin='normal'
+          />
           <TextField
             fullWidth
             label='Description'
@@ -183,26 +199,36 @@ const ThoughtDetails = ({ token }) => {
           />
 
           {/* Buttons for updating and deleting */}
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-            sx={{
-              mt: 2,
-              backgroundColor: '#2c4e51',
-              '&:hover': { backgroundColor: '#2c3e50' },
-            }}
+          <Grid
+            container
+            spacing={1}
+            sx={{ mt: 2, justifyContent: 'flex-end' }}
           >
-            Update Thought
-          </Button>
-          <Button
-            variant='outlined'
-            color='error'
-            sx={{ mt: 2, ml: 2 }}
-            onClick={handleDelete}
-          >
-            Delete Thought
-          </Button>
+            <Grid item>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+                sx={{
+                  mt: 2,
+                  backgroundColor: '#2c4e51',
+                  '&:hover': { backgroundColor: '#2c3e50' },
+                }}
+              >
+                Update Thought
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant='outlined'
+                color='error'
+                sx={{ mt: 2 }}
+                onClick={handleDelete}
+              >
+                Delete Thought
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>

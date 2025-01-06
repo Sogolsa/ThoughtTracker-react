@@ -67,7 +67,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
   };
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box sx={{ padding: 3, textAlign: 'center' }}>
       {/* Title */}
       <Typography variant='h4' gutterBottom>
         Your Thoughts
@@ -80,6 +80,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       {/* Form to add a new thought */}
       <Card
         sx={{
+          mt: 3,
           mb: 3,
           padding: 2,
           backgroundColor: 'white',
@@ -107,7 +108,9 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
               // mt: 3,
               mb: 2,
               backgroundColor: '#2c4e51',
-              '&:hover': { backgroundColor: '#2c3e50' },
+              // backgroundColor: 'Salmon',
+              // '&:hover': { backgroundColor: '#2c3e50' },
+              '&:hover': { backgroundColor: 'salmon' },
             }}
             fullWidth
           >
@@ -140,7 +143,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
                   Click to view and manage details
                 </Typography>
               </CardContent>
-              <CardActions>
+              <CardActions sx={{ justifyContent: 'center' }}>
                 <Button
                   size='small'
                   component={Link}
