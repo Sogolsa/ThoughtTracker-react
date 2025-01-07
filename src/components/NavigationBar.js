@@ -44,7 +44,7 @@ const NavigationBar = ({ userId, onLogout }) => {
   ];
 
   return (
-    <AppBar position='static' sx={{ backgroundColor: '#2c4e51' }}>
+    <AppBar position='static' sx={{ backgroundColor: '#194d5c' }}>
       <Toolbar>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           <Link
@@ -74,6 +74,7 @@ const NavigationBar = ({ userId, onLogout }) => {
             component={Link}
             to='/thoughts'
             sx={{
+              // color: 'black',
               fontWeight: isActive('/thoughts') ? 'bold' : 'normal',
               borderBottom: isActive('/thoughts') ? '2px solid salmon' : 'none',
             }}
@@ -85,13 +86,18 @@ const NavigationBar = ({ userId, onLogout }) => {
             component={Link}
             to={'/users/me'}
             sx={{
+              // color: 'black',
               fontWeight: isActive('/users/me') ? 'bold' : 'normal',
               borderBottom: isActive('/users/me') ? '2px solid salmon' : 'none',
             }}
           >
             Profile
           </Button>
-          <Button color='inherit' onClick={handleLogout}>
+          <Button
+            color='inherit'
+            onClick={handleLogout}
+            // sx={{ color: 'black' }}
+          >
             Logout
           </Button>
         </Box>

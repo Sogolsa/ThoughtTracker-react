@@ -67,9 +67,18 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
   };
 
   return (
-    <Box sx={{ padding: 3, textAlign: 'center' }}>
+    <Box
+      sx={{
+        padding: 3,
+        margin: '0 auto', // Centers the box horizontally
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       {/* Title */}
-      <Typography variant='h4' gutterBottom>
+      <Typography variant='h3' gutterBottom>
         Your Thoughts
       </Typography>
       <Typography variant='body1' color='textSecondary' sx={{ mb: 2 }}>
@@ -82,8 +91,10 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
         sx={{
           mt: 3,
           mb: 3,
-          padding: 2,
-          backgroundColor: 'white',
+          padding: 5,
+          // backgroundColor: '#C8E6C9',
+          backgroundColor: '#F2FCFC',
+
           boxShadow: 'none',
           border: '1px solid #C8E6C9',
         }}
@@ -91,7 +102,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
         <Typography variant='h6' gutterBottom>
           Add a New Thought
         </Typography>
-        <Box component='form' onSubmit={handleSubmit}>
+        <Box component='form' onSubmit={handleSubmit} sx={{ padding: 1 }}>
           <TextField
             fullWidth
             label='New Thought Name'
@@ -99,6 +110,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
             onChange={(e) => setNewThought(e.target.value)}
             required
             sx={{ mb: 2 }}
+            multiline
           />
           <Button
             type='submit'
@@ -107,8 +119,9 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
             sx={{
               // mt: 3,
               mb: 2,
-              backgroundColor: '#2c4e51',
-              // backgroundColor: 'Salmon',
+              // backgroundColor: '#2c4e51',
+              backgroundColor: '#194d5c',
+
               // '&:hover': { backgroundColor: '#2c3e50' },
               '&:hover': { backgroundColor: 'salmon' },
             }}
@@ -131,7 +144,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
               sx={{
                 mb: 2,
                 // backgroundColor: '#E8F5E9',
-                backgroundColor: 'white',
+                // backgroundColor: 'white',
                 padding: 2,
                 boxShadow: 'none',
                 border: '1px solid #C8E6C9',
