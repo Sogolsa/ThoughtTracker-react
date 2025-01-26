@@ -9,7 +9,7 @@ import {
   Grid,
 } from "@mui/material";
 
-const SignupView = () => {
+const SignupView = ({ setUser }) => {
   const [formData, setFormData] = useState({
     userName: "",
     Email: "",

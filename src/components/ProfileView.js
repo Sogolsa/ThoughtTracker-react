@@ -19,6 +19,11 @@ const ProfileView = ({ user, setUser, token }) => {
 
   useEffect(() => {
     console.log("useEffect triggered with token:", token);
+    if (!token) {
+      console.warn("No token found, redirecting to login.");
+      navigate("/login");
+      return;
+    }
 
     // Fetch user details
     const fetchUser = async () => {
@@ -35,7 +40,7 @@ const ProfileView = ({ user, setUser, token }) => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched user data:", data); // Check the fetched user data
+          console.log("Fetched user data:", data);
 
           setUser(data);
           setFormData({

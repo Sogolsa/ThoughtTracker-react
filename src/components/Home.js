@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Box } from '@mui/material';
+import React, { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
-import NavigationBar from './NavigationBar';
-import SignupView from './SignupView';
-import WelcomePage from './WelcomePage';
-import LoginView from './LoginView';
-import ThoughtsView from './ThoughtsView';
-import ThoughtDetails from './ThoughtDetails';
-import ProfileView from './ProfileView';
+import NavigationBar from "./NavigationBar";
+import SignupView from "./SignupView";
+import WelcomePage from "./WelcomePage";
+import LoginView from "./LoginView";
+import ThoughtsView from "./ThoughtsView";
+import ThoughtDetails from "./ThoughtDetails";
+import ProfileView from "./ProfileView";
 
 const Home = () => {
-  const storedUser = localStorage.getItem('user');
-  const storedToken = localStorage.getItem('token');
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [thoughts, setThoughts] = useState([]);
@@ -21,38 +21,50 @@ const Home = () => {
   const onLogout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   };
 
   return (
     <Box>
       {user && <NavigationBar onLogout={onLogout} />}
       <Routes>
-        <Route path='/' element={<WelcomePage />} />
-        <Route path='/home' element={<WelcomePage />} />
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/home" element={<WelcomePage />} />
         <Route
-          path='/thoughts'
+          path="/thoughts"
           element={
-            <ThoughtsView
-              token={token}
-              thoughts={thoughts}
-              setThoughts={setThoughts}
-            />
+            token ? (
+              <ThoughtsView
+                token={token}
+                thoughts={thoughts}
+                setThoughts={setThoughts}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
-        <Route path='/signup' element={<SignupView setUser={setUser} />} />
+        <Route path="/signup" element={<SignupView />} />
         <Route
-          path='/thoughts/:thoughtId'
-          element={<ThoughtDetails token={token} />}
+          path="/thoughts/:thoughtId"
+          element={
+            token ? <ThoughtDetails token={token} /> : <Navigate to="/login" />
+          }
         />
         <Route
-          path='/users/me'
-          element={<ProfileView token={token} user={user} setUser={setUser} />}
+          path="/users/me"
+          element={
+            token ? (
+              <ProfileView token={token} user={user} setUser={setUser} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
 
         <Route
-          path='/login'
+          path="/login"
           element={
             <LoginView
               onLoggedIn={(user, token) => {
