@@ -18,6 +18,8 @@ const ProfileView = ({ user, setUser, token }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("useEffect triggered with token:", token);
+
     // Fetch user details
     const fetchUser = async () => {
       try {
@@ -33,6 +35,8 @@ const ProfileView = ({ user, setUser, token }) => {
 
         if (response.ok) {
           const data = await response.json();
+          console.log("Fetched user data:", data); // Check the fetched user data
+
           setUser(data);
           setFormData({
             userName: data.userName || "",
@@ -51,7 +55,7 @@ const ProfileView = ({ user, setUser, token }) => {
     } else {
       navigate("/login");
     }
-  }, [token]);
+  }, [token, setUser, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -149,7 +153,7 @@ const ProfileView = ({ user, setUser, token }) => {
             fullWidth
             label="Email"
             name="Email"
-            value={formData.Email}
+            value={formData.Email || ""}
             onChange={handleChange}
             margin="normal"
             required
@@ -158,7 +162,7 @@ const ProfileView = ({ user, setUser, token }) => {
             fullWidth
             label="Password"
             name="Password"
-            value={formData.Password}
+            value={formData.Password || ""}
             onChange={handleChange}
             margin="normal"
             type="password"
