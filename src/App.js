@@ -1,10 +1,10 @@
-import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import Home from './components/Home';
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import Home from "./components/Home";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ThoughtTracker-react">
       <Home />;
     </BrowserRouter>
   );
