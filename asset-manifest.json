@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ThoughtTracker-react/static/css/main.ba65a15e.css",
+    "main.js": "/ThoughtTracker-react/static/js/main.d74b35c8.js",
+    "static/js/453.7249769d.chunk.js": "/ThoughtTracker-react/static/js/453.7249769d.chunk.js",
+    "static/media/hero-image.jpg": "/ThoughtTracker-react/static/media/hero-image.d9c60c867a07f118b3e3.jpg",
+    "index.html": "/ThoughtTracker-react/index.html",
+    "main.ba65a15e.css.map": "/ThoughtTracker-react/static/css/main.ba65a15e.css.map",
+    "main.d74b35c8.js.map": "/ThoughtTracker-react/static/js/main.d74b35c8.js.map",
+    "453.7249769d.chunk.js.map": "/ThoughtTracker-react/static/js/453.7249769d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba65a15e.css",
+    "static/js/main.d74b35c8.js"
+  ]
+}
