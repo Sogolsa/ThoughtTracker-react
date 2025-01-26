@@ -35,8 +35,8 @@ const ProfileView = ({ user, setUser, token }) => {
           const data = await response.json();
           setUser(data);
           setFormData({
-            userName: data.userName,
-            Email: data.Email,
+            userName: data.userName || "",
+            Email: data.Email || "",
             Password: "",
           });
         } else {
@@ -96,6 +96,9 @@ const ProfileView = ({ user, setUser, token }) => {
   };
 
   const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete your account?")) {
+      return;
+    }
     try {
       const response = await fetch(
         "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
@@ -119,10 +122,8 @@ const ProfileView = ({ user, setUser, token }) => {
     }
   };
 
-  if (!user) return <Typography>Loading...</Typography>;
-
   return (
-    <Container maxWidth="sm" sx={{ textAlign: "center" }}>
+    <Container maxWidth="xs" sx={{ textAlign: "center" }}>
       <Typography variant="h4" sx={{ mt: 3 }} gutterBottom>
         Profile
       </Typography>
@@ -139,7 +140,7 @@ const ProfileView = ({ user, setUser, token }) => {
             fullWidth
             label="Username"
             name="userName"
-            value={formData.userName}
+            value={formData.userName || ""}
             onChange={handleChange}
             margin="normal"
             required
