@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ThoughtTracker-react/static/css/main.ba65a15e.css",
-    "main.js": "/ThoughtTracker-react/static/js/main.b37bc4d3.js",
+    "main.js": "/ThoughtTracker-react/static/js/main.7a6c26ba.js",
     "static/js/453.7249769d.chunk.js": "/ThoughtTracker-react/static/js/453.7249769d.chunk.js",
     "static/media/hero-image.jpg": "/ThoughtTracker-react/static/media/hero-image.d9c60c867a07f118b3e3.jpg",
     "index.html": "/ThoughtTracker-react/index.html",
     "main.ba65a15e.css.map": "/ThoughtTracker-react/static/css/main.ba65a15e.css.map",
-    "main.b37bc4d3.js.map": "/ThoughtTracker-react/static/js/main.b37bc4d3.js.map",
+    "main.7a6c26ba.js.map": "/ThoughtTracker-react/static/js/main.7a6c26ba.js.map",
     "453.7249769d.chunk.js.map": "/ThoughtTracker-react/static/js/453.7249769d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ba65a15e.css",
-    "static/js/main.b37bc4d3.js"
+    "static/js/main.7a6c26ba.js"
   ]
 }
