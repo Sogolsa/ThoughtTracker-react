@@ -42,12 +42,17 @@ const ProfileView = ({ user, setUser, token }) => {
           const data = await response.json();
           console.log("Fetched user data:", data);
 
-          setUser(data);
-          setFormData({
-            userName: data.userName || "",
-            Email: data.Email || "",
-            Password: "",
-          });
+          if (
+            data.userName !== formData.userName ||
+            data.Email !== formData.Email
+          ) {
+            setUser(data);
+            setFormData({
+              userName: data.userName || "",
+              Email: data.Email || "",
+              Password: "",
+            });
+          }
         } else {
           console.error("Failed to fetch user:", response.statusText);
         }
@@ -60,7 +65,7 @@ const ProfileView = ({ user, setUser, token }) => {
     } else {
       navigate("/login");
     }
-  }, [token, setUser, navigate]);
+  }, [token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
