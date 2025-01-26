@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -7,13 +7,13 @@ import {
   Typography,
   Box,
   Grid,
-} from '@mui/material';
+} from "@mui/material";
 
 const ProfileView = ({ user, setUser, token }) => {
   const [formData, setFormData] = useState({
-    userName: '',
-    Email: '',
-    Password: '',
+    userName: "",
+    Email: "",
+    Password: "",
   });
   const navigate = useNavigate();
 
@@ -22,9 +22,9 @@ const ProfileView = ({ user, setUser, token }) => {
     const fetchUser = async () => {
       try {
         const response = await fetch(
-          'https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me',
+          "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
           {
-            method: 'GET',
+            method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -37,19 +37,19 @@ const ProfileView = ({ user, setUser, token }) => {
           setFormData({
             userName: data.userName,
             Email: data.Email,
-            Password: '',
+            Password: "",
           });
         } else {
-          console.error('Failed to fetch user:', response.statusText);
+          console.error("Failed to fetch user:", response.statusText);
         }
       } catch (error) {
-        console.error('Error fetching user:', error);
+        console.error("Error fetching user:", error);
       }
     };
     if (token) {
       fetchUser();
     } else {
-      navigate('/login');
+      navigate("/login");
     }
   }, [token]);
 
@@ -65,11 +65,11 @@ const ProfileView = ({ user, setUser, token }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        'https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me',
+        "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
         {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
@@ -79,28 +79,28 @@ const ProfileView = ({ user, setUser, token }) => {
       if (response.ok) {
         const updatedUser = await response.json();
         setUser(updatedUser);
-        alert('Profile updated successfully');
+        alert("Profile updated successfully");
       } else if (response.status === 422) {
         const errorData = await response.json();
         // Extract and display error messages
         const errorMessages = errorData.errors
           .map((err) => `${err.path}: ${err.msg}`)
-          .join('\n');
+          .join("\n");
         alert(`Validation failed:\n${errorMessages}`);
       } else {
-        alert('Failed to update profile');
+        alert("Failed to update profile");
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error("Error updating profile:", error);
     }
   };
 
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        'https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me',
+        "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
         {
-          method: 'DELETE',
+          method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -108,74 +108,74 @@ const ProfileView = ({ user, setUser, token }) => {
       );
 
       if (response.ok) {
-        alert('Account deleted successfully');
+        alert("Account deleted successfully");
         localStorage.clear();
-        navigate('/signup');
+        navigate("/signup");
       } else {
-        alert('Failed to delete account');
+        alert("Failed to delete account");
       }
     } catch (error) {
-      console.error('Error deleting account:', error);
+      console.error("Error deleting account:", error);
     }
   };
 
   if (!user) return <Typography>Loading...</Typography>;
 
   return (
-    <Container maxWidth='sm' sx={{ textAlign: 'center' }}>
-      <Typography variant='h4' sx={{ mt: 3 }} gutterBottom>
+    <Container maxWidth="sm" sx={{ textAlign: "center" }}>
+      <Typography variant="h4" sx={{ mt: 3 }} gutterBottom>
         Profile
       </Typography>
       <Box
         sx={{
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
           padding: 4,
           borderRadius: 2,
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+          boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Box component='form' onSubmit={handleUpdate}>
+        <Box component="form" onSubmit={handleUpdate}>
           <TextField
             fullWidth
-            label='Username'
-            name='userName'
+            label="Username"
+            name="userName"
             value={formData.userName}
             onChange={handleChange}
-            margin='normal'
+            margin="normal"
             required
           />
           <TextField
             fullWidth
-            label='Email'
-            name='Email'
+            label="Email"
+            name="Email"
             value={formData.Email}
             onChange={handleChange}
-            margin='normal'
+            margin="normal"
             required
           />
           <TextField
             fullWidth
-            label='Password'
-            name='Password'
+            label="Password"
+            name="Password"
             value={formData.Password}
             onChange={handleChange}
-            margin='normal'
-            type='password'
+            margin="normal"
+            type="password"
           />
           <Grid
             container
             spacing={1}
-            sx={{ mt: 2, justifyContent: 'flex-end' }}
+            sx={{ mt: 2, justifyContent: "flex-end" }}
           >
             <Grid item>
               <Button
-                type='submit'
-                variant='contained'
-                color='primary'
+                type="submit"
+                variant="contained"
+                color="primary"
                 sx={{
                   mt: 2,
-                  backgroundColor: '#2c4e51',
-                  '&:hover': { backgroundColor: '#2c3e50' },
+                  backgroundColor: "#2c4e51",
+                  "&:hover": { backgroundColor: "#2c3e50" },
                 }}
               >
                 Update Profile
@@ -183,8 +183,8 @@ const ProfileView = ({ user, setUser, token }) => {
             </Grid>
             <Grid item>
               <Button
-                variant='outlined'
-                color='error'
+                variant="outlined"
+                color="error"
                 sx={{ mt: 2 }}
                 onClick={handleDelete}
               >
