@@ -45,7 +45,7 @@ const SignupView = ({ setUser }) => {
       if (response.ok) {
         alert("Signup successful");
         navigate("/login");
-      } else if (response.status === 400) {
+      } else if (response.status === 409) {
         const errorData = await response.json();
         alert(`Signup failed: ${errorData.message}`);
       } else {
