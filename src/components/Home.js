@@ -18,16 +18,6 @@ const Home = () => {
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [thoughts, setThoughts] = useState([]);
 
-  // useEffect(() => {
-  //   if (storedToken) {
-  //     setToken(storedToken);
-  //     setUser(storedUser);
-  //   } else {
-  //     setUser(null);
-  //     setToken(null);
-  //   }
-  // }, [storedToken, storedUser]);
-
   // Define the onLogout function
   const onLogout = () => {
     setUser(null);
