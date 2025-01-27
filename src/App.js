@@ -4,7 +4,7 @@ import Home from "./components/Home";
 
 const App = () => {
   return (
-    <BrowserRouter basename="/ThoughtTracker-react">
+    <BrowserRouter>
       <Home />
     </BrowserRouter>
   );
