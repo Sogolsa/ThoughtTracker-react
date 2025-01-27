@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   Button,
@@ -7,13 +7,13 @@ import {
   Typography,
   Box,
   Grid,
-} from '@mui/material';
+} from "@mui/material";
 
 const LoginView = ({ onLoggedIn }) => {
   const [formData, setFormData] = useState({
-    userName: '',
-    Email: '',
-    Password: '',
+    // userName: '',
+    Email: "",
+    Password: "",
   });
 
   const navigate = useNavigate();
@@ -28,15 +28,15 @@ const LoginView = ({ onLoggedIn }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login form submitted:', formData);
+    console.log("Login form submitted:", formData);
 
     try {
       const response = await fetch(
-        'https://thought-tracker-journal-4688a4169626.herokuapp.com/login',
+        "https://thought-tracker-journal-4688a4169626.herokuapp.com/login",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         }
@@ -44,23 +44,23 @@ const LoginView = ({ onLoggedIn }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Login successful:', data);
+        console.log("Login successful:", data);
         if (data.user) {
-          localStorage.setItem('user', JSON.stringify(data.user));
-          localStorage.setItem('token', data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
-          navigate('/thoughts');
+          navigate("/thoughts");
         } else {
-          alert('No such user');
+          alert("No such user");
         }
       } else {
         // Handle non-OK response
         const errorData = await response.json();
-        alert(`Login failed: ${errorData.message || 'Unknown error'}`);
+        alert(`Login failed: ${errorData.message || "Unknown error"}`);
       }
     } catch (error) {
-      console.error('Login error:', error);
-      alert('Something went wrong. Please try again.');
+      console.error("Login error:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -74,47 +74,35 @@ const LoginView = ({ onLoggedIn }) => {
     //     alignItems: 'center',
     //   }}
     // >
-    <Container maxWidth='sm'>
+    <Container maxWidth="sm">
       <Box
         sx={{
           marginTop: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <Typography component='h1' variant='h5' gutterBottom>
+        <Typography component="h1" variant="h5" gutterBottom>
           Log In
         </Typography>
         <Box
           sx={{
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
             padding: 4,
             borderRadius: 2,
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Box component='form' onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id='userName'
-                  name='userName'
-                  label='Username'
-                  type='text'
-                  value={formData.userName}
-                  onChange={handleChange}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  id='Email'
-                  name='Email'
-                  label='Email'
-                  type='email'
+                  id="Email"
+                  name="Email"
+                  label="Email"
+                  type="email"
                   value={formData.Email}
                   onChange={handleChange}
                   required
@@ -123,10 +111,10 @@ const LoginView = ({ onLoggedIn }) => {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  id='Password'
-                  name='Password'
-                  label='Password'
-                  type='password'
+                  id="Password"
+                  name="Password"
+                  label="Password"
+                  type="password"
                   value={formData.Password}
                   onChange={handleChange}
                   required
@@ -134,14 +122,14 @@ const LoginView = ({ onLoggedIn }) => {
               </Grid>
             </Grid>
             <Button
-              type='submit'
+              type="submit"
               fullWidth
-              variant='contained'
+              variant="contained"
               sx={{
                 mt: 3,
                 mb: 2,
-                backgroundColor: '#2c4e51',
-                '&:hover': { backgroundColor: '#2c3e50' },
+                backgroundColor: "#2c4e51",
+                "&:hover": { backgroundColor: "#2c3e50" },
               }}
             >
               Log In
@@ -149,15 +137,15 @@ const LoginView = ({ onLoggedIn }) => {
 
             <Button
               fullWidth
-              variant='outlined'
-              onClick={() => navigate('/')}
+              variant="outlined"
+              onClick={() => navigate("/")}
               sx={{
                 mb: 2,
-                borderColor: '#2c4e51',
-                color: '#2c4e51',
-                '&:hover': {
-                  borderColor: '#2c3e50',
-                  backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                borderColor: "#2c4e51",
+                color: "#2c4e51",
+                "&:hover": {
+                  borderColor: "#2c3e50",
+                  backgroundColor: "rgba(44, 62, 80, 0.1)",
                 },
               }}
             >
