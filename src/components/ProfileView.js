@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 
 const ProfileView = ({ user, setUser, token }) => {
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     userName: "",
     Email: "",
@@ -28,15 +30,12 @@ const ProfileView = ({ user, setUser, token }) => {
     // Fetch user details
     const fetchUser = async () => {
       try {
-        const response = await fetch(
-          "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${API_URL}/users/me`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -78,17 +77,14 @@ const ProfileView = ({ user, setUser, token }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/users/me`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const updatedUser = await response.json();
@@ -114,15 +110,12 @@ const ProfileView = ({ user, setUser, token }) => {
       return;
     }
     try {
-      const response = await fetch(
-        "https://thought-tracker-journal-4688a4169626.herokuapp.com/users/me",
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/users/me`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         alert("Account deleted successfully");

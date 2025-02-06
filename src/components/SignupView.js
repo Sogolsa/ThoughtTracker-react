@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 const SignupView = ({ setUser }) => {
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
   const [formData, setFormData] = useState({
     userName: "",
     Email: "",
@@ -31,16 +32,13 @@ const SignupView = ({ setUser }) => {
     console.log("Form submitted:", formData);
 
     try {
-      const response = await fetch(
-        "https://thought-tracker-journal-4688a4169626.herokuapp.com/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         alert("Signup successful");

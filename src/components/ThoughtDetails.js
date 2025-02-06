@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 
 const ThoughtDetails = ({ token }) => {
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
+
   const { thoughtId } = useParams();
   const navigate = useNavigate();
   const [thought, setThought] = useState(null);
@@ -25,15 +27,12 @@ const ThoughtDetails = ({ token }) => {
     // Fetch thought details
     const fetchThought = async () => {
       try {
-        const response = await fetch(
-          `https://thought-tracker-journal-4688a4169626.herokuapp.com/thoughts/${thoughtId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -67,17 +66,14 @@ const ThoughtDetails = ({ token }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `https://thought-tracker-journal-4688a4169626.herokuapp.com/thoughts/${thoughtId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const updatedThought = await response.json();
@@ -94,15 +90,12 @@ const ThoughtDetails = ({ token }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(
-        `https://thought-tracker-journal-4688a4169626.herokuapp.com/thoughts/${thoughtId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         alert("Thought deleted successfully");

@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 
 const LoginView = ({ onLoggedIn }) => {
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     // userName: '',
     Email: "",
@@ -31,16 +33,13 @@ const LoginView = ({ onLoggedIn }) => {
     console.log("Login form submitted:", formData);
 
     try {
-      const response = await fetch(
-        "https://thought-tracker-journal-4688a4169626.herokuapp.com/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -65,15 +64,6 @@ const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    // <Box
-    //   sx={{
-    //     backgroundColor: '#e6edeb',
-    //     minHeight: '100vh',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //   }}
-    // >
     <Container maxWidth="sm">
       <Box
         sx={{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -8,31 +8,30 @@ import {
   Card,
   CardContent,
   CardActions,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import '../index.css';
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import "../index.css";
 
 const ThoughtsView = ({ token, thoughts, setThoughts }) => {
-  const [newThought, setNewThought] = useState(''); // New thought name
+  const API_URL = process.env.REACT_APP_BACKEND_URL;
+
+  const [newThought, setNewThought] = useState(""); // New thought name
 
   // Fetch thoughts when the component mounts
   useEffect(() => {
-    fetch(
-      'https://thought-tracker-journal-4688a4169626.herokuapp.com/thoughts',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch(`${API_URL}/thoughts`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Fetched thoughts:', data);
+        console.log("Fetched thoughts:", data);
         setThoughts(data);
       })
       .catch((error) => {
-        console.error('Error fetching thoughts:', error);
+        console.error("Error fetching thoughts:", error);
       });
   }, [token]);
 
@@ -44,25 +43,22 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       thoughtName: newThought,
     };
 
-    fetch(
-      'https://thought-tracker-journal-4688a4169626.herokuapp.com/thoughts',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(thoughtData),
-      }
-    )
+    fetch(`${API_URL}/thoughts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(thoughtData),
+    })
       .then((response) => response.json())
       .then((data) => {
-        console.log('New thought added:', data);
+        console.log("New thought added:", data);
         setThoughts([...thoughts, data]); // Add the new thought to the list
-        setNewThought(''); // Clear the input field
+        setNewThought(""); // Clear the input field
       })
       .catch((error) => {
-        console.error('Error adding new thought:', error);
+        console.error("Error adding new thought:", error);
       });
   };
 
@@ -70,18 +66,18 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
     <Box
       sx={{
         padding: 3,
-        margin: '0 auto', // Centers the box horizontally
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        margin: "0 auto", // Centers the box horizontally
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       {/* Title */}
-      <Typography variant='h3' gutterBottom>
+      <Typography variant="h3" gutterBottom>
         Your Thoughts
       </Typography>
-      <Typography variant='body1' color='textSecondary' sx={{ mb: 2 }}>
+      <Typography variant="body1" color="textSecondary" sx={{ mb: 2 }}>
         Add a new thought using the form below. Once added, click on a thought
         to update its details or delete it.
       </Typography>
@@ -93,19 +89,19 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
           mb: 3,
           padding: 5,
           // backgroundColor: '#C8E6C9',
-          backgroundColor: '#F2FCFC',
+          backgroundColor: "#F2FCFC",
 
-          boxShadow: 'none',
-          border: '1px solid #C8E6C9',
+          boxShadow: "none",
+          border: "1px solid #C8E6C9",
         }}
       >
-        <Typography variant='h6' gutterBottom>
+        <Typography variant="h6" gutterBottom>
           Add a New Thought
         </Typography>
-        <Box component='form' onSubmit={handleSubmit} sx={{ padding: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ padding: 1 }}>
           <TextField
             fullWidth
-            label='New Thought Name'
+            label="New Thought Name"
             value={newThought}
             onChange={(e) => setNewThought(e.target.value)}
             required
@@ -113,17 +109,17 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
             multiline
           />
           <Button
-            type='submit'
-            variant='contained'
-            color='primary'
+            type="submit"
+            variant="contained"
+            color="primary"
             sx={{
               // mt: 3,
               mb: 2,
               // backgroundColor: '#2c4e51',
-              backgroundColor: '#194d5c',
+              backgroundColor: "#194d5c",
 
               // '&:hover': { backgroundColor: '#2c3e50' },
-              '&:hover': { backgroundColor: 'salmon' },
+              "&:hover": { backgroundColor: "salmon" },
             }}
             fullWidth
           >
@@ -133,7 +129,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       </Card>
 
       {/* List of thoughts */}
-      <Typography variant='h6' gutterBottom>
+      <Typography variant="h6" gutterBottom>
         Your Thoughts List
       </Typography>
       {thoughts.length > 0 ? (
@@ -146,30 +142,30 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
                 // backgroundColor: '#E8F5E9',
                 // backgroundColor: 'white',
                 padding: 2,
-                boxShadow: 'none',
-                border: '1px solid #C8E6C9',
+                boxShadow: "none",
+                border: "1px solid #C8E6C9",
               }}
             >
               <CardContent>
-                <Typography variant='h6'>{thought.thoughtName}</Typography>
-                <Typography variant='body2' color='textSecondary'>
+                <Typography variant="h6">{thought.thoughtName}</Typography>
+                <Typography variant="body2" color="textSecondary">
                   Click to view and manage details
                 </Typography>
               </CardContent>
-              <CardActions sx={{ justifyContent: 'center' }}>
+              <CardActions sx={{ justifyContent: "center" }}>
                 <Button
-                  size='small'
+                  size="small"
                   component={Link}
                   to={`/thoughts/${thought._id}`}
-                  variant='outlined'
-                  color='primary'
+                  variant="outlined"
+                  color="primary"
                   sx={{
                     mb: 2,
-                    borderColor: '#2c4e51',
-                    color: '#2c4e51',
-                    '&:hover': {
-                      borderColor: '#2c3e50',
-                      backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                    borderColor: "#2c4e51",
+                    color: "#2c4e51",
+                    "&:hover": {
+                      borderColor: "#2c3e50",
+                      backgroundColor: "rgba(44, 62, 80, 0.1)",
                     },
                   }}
                 >
@@ -180,7 +176,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
           ))}
         </List>
       ) : (
-        <Typography variant='body1' color='textSecondary'>
+        <Typography variant="body1" color="textSecondary">
           You have no thoughts yet. Start by adding a new thought above.
         </Typography>
       )}
