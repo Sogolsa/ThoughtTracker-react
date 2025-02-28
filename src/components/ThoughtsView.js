@@ -150,16 +150,25 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
                 key={thought._id}
                 sx={{
                   mb: 2,
-                  // backgroundColor: '#E8F5E9',
-                  // backgroundColor: 'white',
                   padding: 2,
                   boxShadow: "none",
                   border: "1px solid #C8E6C9",
                   borderRadius: "50%",
+                  wordBreak: "break-word",
                 }}
               >
                 <CardContent>
-                  <Typography variant="h6">{thought.thoughtName}</Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    {thought.thoughtName}
+                  </Typography>
                   <Typography variant="body2" color="textSecondary">
                     Click to view and manage details
                   </Typography>
@@ -189,7 +198,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
           </List>
         ) : (
           <Typography variant="body1" color="textSecondary">
-            You have no thoughts yet. Start by adding a new thought above.
+            You have no thoughts yet. Start by adding a new thought.
           </Typography>
         )}
       </Grid>
