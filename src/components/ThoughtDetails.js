@@ -368,6 +368,7 @@ const ThoughtDetails = ({ token }) => {
                 padding: 4,
                 borderRadius: 2,
                 boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+                mb: 4,
               }}
             >
               <Typography variant="h6">
