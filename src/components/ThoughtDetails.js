@@ -271,7 +271,8 @@ const ThoughtDetails = ({ token }) => {
                 value={formData.thoughtName}
                 multiline
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
+                variant="filled"
               />
               <TextField
                 fullWidth
@@ -280,7 +281,8 @@ const ThoughtDetails = ({ token }) => {
                 value={formData.Description}
                 multiline
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
+                variant="filled"
               />
               <TextField
                 fullWidth
@@ -288,8 +290,9 @@ const ThoughtDetails = ({ token }) => {
                 name="Emotions"
                 value={formData.Emotions}
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
                 multiline
+                variant="filled"
               />
               <TextField
                 fullWidth
@@ -297,8 +300,9 @@ const ThoughtDetails = ({ token }) => {
                 name="Problems"
                 value={formData.Problems}
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
                 multiline
+                variant="filled"
               />
               <TextField
                 fullWidth
@@ -306,8 +310,9 @@ const ThoughtDetails = ({ token }) => {
                 name="possibleSolutions"
                 value={formData.possibleSolutions}
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
                 multiline
+                variant="filled"
               />
               <TextField
                 fullWidth
@@ -315,8 +320,9 @@ const ThoughtDetails = ({ token }) => {
                 name="Affirmation"
                 value={formData.Affirmation}
                 onChange={handleChange}
-                margin="normal"
+                margin="dense"
                 multiline
+                variant="filled"
               />
               <Grid
                 container

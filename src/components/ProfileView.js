@@ -149,7 +149,8 @@ const ProfileView = ({ user, setUser, token }) => {
             name="userName"
             value={formData.userName || ""}
             onChange={handleChange}
-            margin="normal"
+            margin="dense"
+            variant="filled"
             required
           />
           <TextField
@@ -158,7 +159,8 @@ const ProfileView = ({ user, setUser, token }) => {
             name="Email"
             value={formData.Email || ""}
             onChange={handleChange}
-            margin="normal"
+            margin="dense"
+            variant="filled"
             required
           />
           <TextField
@@ -167,7 +169,8 @@ const ProfileView = ({ user, setUser, token }) => {
             name="Password"
             value={formData.Password || ""}
             onChange={handleChange}
-            margin="normal"
+            margin="dense"
+            variant="filled"
             type="password"
           />
           <Grid
