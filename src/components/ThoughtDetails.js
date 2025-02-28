@@ -8,7 +8,6 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-
 const ThoughtDetails = ({ token }) => {
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -78,6 +77,7 @@ const ThoughtDetails = ({ token }) => {
       if (response.ok) {
         const updatedThought = await response.json();
         setThought(updatedThought);
+
         alert("Thought updated successfully");
         navigate("/thoughts");
       } else {
