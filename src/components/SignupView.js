@@ -54,25 +54,47 @@ const SignupView = ({ setUser }) => {
       });
 
       if (response.ok) {
-        enqueueSnackbar("Signup successful", { variant: "success" });
+        enqueueSnackbar("Signup successful", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "right",
+          },
+        });
         navigate("/login");
       } else if (response.status === 409) {
         const errorData = await response.json();
         enqueueSnackbar(
           `Signup failed: ${errorData.message || "Unknown error"}`,
-          { variant: "error" }
+          {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "right",
+            },
+          }
         );
       } else {
         const errorData = await response.json();
         enqueueSnackbar(
           `Signup failed: ${errorData.message || "Unknown error"}`,
-          { variant: "error" }
+          {
+            variant: "error",
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "right",
+            },
+          }
         );
       }
     } catch (error) {
       console.error("Error during signup:", error);
       enqueueSnackbar("An error occurred during signup. Please try again.", {
         variant: "error",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "right",
+        },
       });
     }
   };

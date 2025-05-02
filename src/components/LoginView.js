@@ -50,7 +50,13 @@ const LoginView = ({ onLoggedIn }) => {
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
           navigate("/thoughts");
-          enqueueSnackbar("Login successful", { variant: "success" });
+          enqueueSnackbar("Login successful", {
+            variant: "success",
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "right",
+            },
+          });
         } else {
           enqueueSnackbar("No such user", { variant: "error" });
         }
@@ -66,6 +72,10 @@ const LoginView = ({ onLoggedIn }) => {
       console.error("Login error:", error);
       enqueueSnackbar("An error occurred during login. Please try again.", {
         variant: "error",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "right",
+        },
       });
     }
   };

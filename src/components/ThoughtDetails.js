@@ -85,7 +85,13 @@ const ThoughtDetails = ({ token }) => {
         const updatedThought = await response.json();
         setThought(updatedThought);
         setShowDetails(true);
-        enqueueSnackbar("Thought updated successfully", { variant: "success" });
+        enqueueSnackbar("Thought updated successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "right",
+          },
+        });
       } else {
         enqueueSnackbar("Failed to update thought", { variant: "error" });
       }
@@ -105,7 +111,13 @@ const ThoughtDetails = ({ token }) => {
       });
 
       if (response.ok) {
-        enqueueSnackbar("Thought deleted successfully", { variant: "success" });
+        enqueueSnackbar("Thought deleted successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "right",
+          },
+        });
         navigate("/thoughts");
       } else {
         enqueueSnackbar("Failed to delete thought", { variant: "error" });

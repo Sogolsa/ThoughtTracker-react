@@ -38,8 +38,8 @@ const GratitudeDetails = ({ token }) => {
           const data = await response.json();
           setMessage(data);
           setFormData({
-            Message: data.message || "",
-            Details: data.detials || [],
+            message: data.message || "",
+            details: data.details || "",
           });
           if (data.message) {
             setShowDetails(true);
@@ -79,7 +79,13 @@ const GratitudeDetails = ({ token }) => {
         const updatedMessage = await response.json();
         setMessage(updatedMessage);
         setShowDetails(true);
-        enqueueSnackbar("Message updated successfully", { variant: "success" });
+        enqueueSnackbar("Message updated successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "right",
+          },
+        });
       } else {
         enqueueSnackbar("Failed to update message", { variant: "error" });
       }
@@ -99,7 +105,13 @@ const GratitudeDetails = ({ token }) => {
       });
 
       if (response.ok) {
-        enqueueSnackbar("Message deleted successfully", { variant: "success" });
+        enqueueSnackbar("Message deleted successfully", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "right",
+          },
+        });
         navigate("/gratitude");
       } else {
         enqueueSnackbar("Failed to delete message", { variant: "error" });
