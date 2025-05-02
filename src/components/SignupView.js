@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { enqueueSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import {
   TextField,
   Button,
@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 
 const SignupView = ({ setUser }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const API_URL = process.env.REACT_APP_BACKEND_URL;
   const [formData, setFormData] = useState({
     userName: "",

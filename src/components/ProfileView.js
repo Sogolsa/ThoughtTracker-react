@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { enqueueSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import {
   TextField,
   Button,
@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 
 const ProfileView = ({ user, setUser, token }) => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const [formData, setFormData] = useState({
@@ -114,28 +116,80 @@ const ProfileView = ({ user, setUser, token }) => {
     }
   };
 
-  const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete your account?")) {
-      return;
-    }
-    try {
-      const response = await fetch(`${API_URL}/users/me`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const handleDelete = async () => {
+  //   if (!window.confirm("Are you sure you want to delete your account?")) {
+  //     return;
+  //   }
+  //   try {
+  //     const response = await fetch(`${API_URL}/users/me`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      if (response.ok) {
-        enqueueSnackbar("Account deleted successfully", { variant: "success" });
-        localStorage.clear();
-        navigate("/signup");
-      } else {
-        enqueueSnackbar("Failed to delete account", { variant: "error" });
+  //     if (response.ok) {
+  //       enqueueSnackbar("Account deleted successfully", { variant: "success" });
+  //       localStorage.clear();
+  //       navigate("/signup");
+  //     } else {
+  //       enqueueSnackbar("Failed to delete account", { variant: "error" });
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting account:", error);
+  //   }
+  // };
+
+  const handleDelete = () => {
+    const confirmDelete = async () => {
+      try {
+        const response = await fetch(`${API_URL}/users/me`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          enqueueSnackbar("Account deleted successfully", {
+            variant: "success",
+          });
+          localStorage.clear();
+          navigate("/signup");
+        } else {
+          enqueueSnackbar("Failed to delete account", { variant: "error" });
+        }
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        enqueueSnackbar("Something went wrong", { variant: "error" });
       }
-    } catch (error) {
-      console.error("Error deleting account:", error);
-    }
+    };
+
+    const key = enqueueSnackbar(
+      "Are you sure you want to delete your account?",
+      {
+        variant: "default",
+        style: { backgroundColor: "white", color: "black" },
+        persist: true,
+        action: () => (
+          <>
+            <Button
+              color="error"
+              size="small"
+              onClick={() => {
+                confirmDelete();
+                closeSnackbar(key);
+              }}
+            >
+              Delete
+            </Button>
+            <Button size="small" onClick={() => closeSnackbar(key)}>
+              Cancel
+            </Button>
+          </>
+        ),
+      }
+    );
   };
 
   return (
