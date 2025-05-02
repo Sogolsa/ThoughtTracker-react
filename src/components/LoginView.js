@@ -15,7 +15,6 @@ const LoginView = ({ onLoggedIn }) => {
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const [formData, setFormData] = useState({
-    // userName: '',
     Email: "",
     Password: "",
   });
@@ -72,7 +71,7 @@ const LoginView = ({ onLoggedIn }) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -104,6 +103,9 @@ const LoginView = ({ onLoggedIn }) => {
                   value={formData.Email}
                   onChange={handleChange}
                   required
+                  variant="filled"
+                  color="secondary"
+                  margin="dense"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,6 +118,9 @@ const LoginView = ({ onLoggedIn }) => {
                   value={formData.Password}
                   onChange={handleChange}
                   required
+                  variant="filled"
+                  color="secondary"
+                  margin="dense"
                 />
               </Grid>
             </Grid>

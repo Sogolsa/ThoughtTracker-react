@@ -94,7 +94,6 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
             mt: 3,
             mb: 3,
             padding: 5,
-            // backgroundColor: '#C8E6C9',
             backgroundColor: "#F2FCFC",
             boxShadow: "none",
             border: "1px solid #C8E6C9",
@@ -138,49 +137,37 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
       </Grid>
 
       {/* List of thoughts */}
-      <Grid item xs={12} sm={6} md={4}>
-        <Typography variant="h6" gutterBottom>
+      <Grid item xs={12} sm={6} md={4} sx={{ paddingTop: 4 }}>
+        <Typography variant="h6" gutterBottom sx={{ mb: 0 }}>
           Your Thoughts List
         </Typography>
+        <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+          Click to view and manage details
+        </Typography>
         {thoughts.length > 0 ? (
-          <List>
+          <Box display="flex" flexDirection="column" gap={1}>
             {thoughts.map((thought) => (
               <Card
                 key={thought._id}
                 sx={{
-                  mb: 2,
-                  padding: 2,
-                  boxShadow: "none",
+                  mb: 0,
+                  padding: 0,
+                  boxShadow: "inherit",
                   border: "1px solid #C8E6C9",
-                  borderRadius: "50%",
                   wordBreak: "break-word",
                 }}
               >
-                <CardContent>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      maxWidth: "100%",
-                    }}
-                  >
-                    {thought.thoughtName}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Click to view and manage details
-                  </Typography>
-                </CardContent>
+                <CardContent sx={{ paddingBottom: 0 }}></CardContent>
                 <CardActions sx={{ justifyContent: "center" }}>
                   <Button
                     size="small"
                     component={Link}
                     to={`/thoughts/${thought._id}`}
-                    variant="outlined"
-                    color="primary"
+                    // variant="outlined"
+                    // color="black"
                     sx={{
                       mb: 2,
+
                       borderColor: "#2c4e51",
                       color: "#2c4e51",
                       "&:hover": {
@@ -189,12 +176,24 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
                       },
                     }}
                   >
-                    Manage Thought
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        textTransform: "none",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        maxWidth: "100%",
+                        color: "black",
+                      }}
+                    >
+                      {thought.thoughtName}
+                    </Typography>
                   </Button>
                 </CardActions>
               </Card>
             ))}
-          </List>
+          </Box>
         ) : (
           <Typography variant="body1" color="textSecondary">
             You have no thoughts yet. Start by adding a new thought.

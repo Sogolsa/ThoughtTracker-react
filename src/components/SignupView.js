@@ -78,7 +78,7 @@ const SignupView = ({ setUser }) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -88,7 +88,7 @@ const SignupView = ({ setUser }) => {
         }}
       >
         <Typography component="h1" variant="h5" gutterBottom>
-          Sign Up
+          Create an Account
         </Typography>
         <Box
           sx={{
@@ -109,6 +109,9 @@ const SignupView = ({ setUser }) => {
                   value={formData.userName}
                   onChange={handleChange}
                   required
+                  variant="filled"
+                  margin="dense"
+                  color="secondary"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -121,6 +124,9 @@ const SignupView = ({ setUser }) => {
                   value={formData.Email}
                   onChange={handleChange}
                   required
+                  variant="filled"
+                  margin="dense"
+                  color="secondary"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,6 +139,9 @@ const SignupView = ({ setUser }) => {
                   value={formData.Password}
                   onChange={handleChange}
                   required
+                  variant="filled"
+                  margin="dense"
+                  color="secondary"
                 />
               </Grid>
             </Grid>
