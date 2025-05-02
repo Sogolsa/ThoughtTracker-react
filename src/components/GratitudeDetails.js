@@ -9,28 +9,25 @@ import {
   Box,
   Grid,
 } from "@mui/material";
-const ThoughtDetails = ({ token }) => {
+const GratitudeDetails = ({ token }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
-  const { thoughtId } = useParams();
+  const { gratitudeId } = useParams();
   const navigate = useNavigate();
-  const [thought, setThought] = useState(null);
+  const [message, setMessage] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
   const [formData, setFormData] = useState({
-    Description: "",
-    Emotions: [],
-    Problems: [],
-    possibleSolutions: [],
-    Affirmation: "",
+    message: "",
+    details: "",
   });
 
   useEffect(() => {
     // Fetch thought details
-    const fetchThought = async () => {
+    const fetchMessage = async () => {
       try {
-        const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+        const response = await fetch(`${API_URL}/gratitude/${gratitudeId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,27 +36,24 @@ const ThoughtDetails = ({ token }) => {
 
         if (response.ok) {
           const data = await response.json();
-          setThought(data);
+          setMessage(data);
           setFormData({
-            Description: data.Description || "",
-            Emotions: data.Emotions || [],
-            Problems: data.Problems || [],
-            possibleSolutions: data.possibleSolutions || [],
-            Affirmation: data.Affirmation || "",
+            Message: data.message || "",
+            Details: data.detials || [],
           });
-          if (data.thoughtName) {
+          if (data.message) {
             setShowDetails(true);
           }
         } else {
-          console.error("Failed to fetch thought:", response.statusText);
+          console.error("Failed to fetch the message:", response.statusText);
         }
       } catch (error) {
-        console.error("Error fetching thought:", error);
+        console.error("Error fetching the messaage:", error);
       }
     };
 
-    fetchThought();
-  }, [thoughtId, token]);
+    fetchMessage();
+  }, [gratitudeId, token]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,7 +66,7 @@ const ThoughtDetails = ({ token }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+      const response = await fetch(`${API_URL}/gratitude/${gratitudeId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,22 +76,22 @@ const ThoughtDetails = ({ token }) => {
       });
 
       if (response.ok) {
-        const updatedThought = await response.json();
-        setThought(updatedThought);
+        const updatedMessage = await response.json();
+        setMessage(updatedMessage);
         setShowDetails(true);
-        enqueueSnackbar("Thought updated successfully", { variant: "success" });
+        enqueueSnackbar("Message updated successfully", { variant: "success" });
       } else {
-        enqueueSnackbar("Failed to update thought", { variant: "error" });
+        enqueueSnackbar("Failed to update message", { variant: "error" });
       }
     } catch (error) {
-      console.error("Error updating thought:", error);
+      console.error("Error updating message:", error);
       enqueueSnackbar("Something went wrong", { variant: "error" });
     }
   };
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${API_URL}/thoughts/${thoughtId}`, {
+      const response = await fetch(`${API_URL}/gratitude/${gratitudeId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -105,18 +99,18 @@ const ThoughtDetails = ({ token }) => {
       });
 
       if (response.ok) {
-        enqueueSnackbar("Thought deleted successfully", { variant: "success" });
-        navigate("/thoughts");
+        enqueueSnackbar("Message deleted successfully", { variant: "success" });
+        navigate("/gratitude");
       } else {
-        enqueueSnackbar("Failed to delete thought", { variant: "error" });
+        enqueueSnackbar("Failed to delete message", { variant: "error" });
       }
     } catch (error) {
-      console.error("Error deleting thought:", error);
+      console.error("Error deleting message:", error);
       enqueueSnackbar("Something went wrong", { variant: "error" });
     }
   };
 
-  if (!thought) return <Typography>Loading...</Typography>;
+  if (!message) return <Typography>Loading...</Typography>;
 
   return (
     <Container maxWidth="md">
@@ -129,7 +123,7 @@ const ThoughtDetails = ({ token }) => {
       >
         <Grid item xs={12} md={showDetails ? 6 : 12}>
           <Typography variant="h4" sx={{ mt: 3 }} gutterBottom>
-            Thought Details
+            Gratitude Details
           </Typography>
           {/* Display the thought name and created date */}
           <Box
@@ -142,18 +136,18 @@ const ThoughtDetails = ({ token }) => {
           >
             <Box sx={{ mb: 3 }}>
               <Typography variant="h6">
-                Thought Name: {thought.thoughtName}
+                Gratitude Name: {message.message}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Created on: {new Date(thought.created_date).toLocaleString()}
+                Created on: {new Date(message.created_date).toLocaleString()}
               </Typography>
             </Box>
             <Box component="form" onSubmit={handleUpdate}>
               <TextField
                 fullWidth
-                label="Edit Thought Name"
-                name="thoughtName"
-                value={formData.thoughtName}
+                label="Edit Gratitude Message"
+                name="message"
+                value={formData.message}
                 multiline
                 onChange={handleChange}
                 margin="dense"
@@ -161,52 +155,12 @@ const ThoughtDetails = ({ token }) => {
               />
               <TextField
                 fullWidth
-                label="Description"
-                name="Description"
-                value={formData.Description}
+                label="Details"
+                name="details"
+                value={formData.details}
                 multiline
                 onChange={handleChange}
                 margin="dense"
-                variant="filled"
-              />
-              <TextField
-                fullWidth
-                label="Emotions"
-                name="Emotions"
-                value={formData.Emotions}
-                onChange={handleChange}
-                margin="dense"
-                multiline
-                variant="filled"
-              />
-              <TextField
-                fullWidth
-                label="Problems"
-                name="Problems"
-                value={formData.Problems}
-                onChange={handleChange}
-                margin="dense"
-                multiline
-                variant="filled"
-              />
-              <TextField
-                fullWidth
-                label="Possible Solutions"
-                name="possibleSolutions"
-                value={formData.possibleSolutions}
-                onChange={handleChange}
-                margin="dense"
-                multiline
-                variant="filled"
-              />
-              <TextField
-                fullWidth
-                label="Affirmation"
-                name="Affirmation"
-                value={formData.Affirmation}
-                onChange={handleChange}
-                margin="dense"
-                multiline
                 variant="filled"
               />
 
@@ -217,13 +171,13 @@ const ThoughtDetails = ({ token }) => {
                 color="primary"
                 sx={{
                   mt: 2,
-                  width: "100%",
                   backgroundColor: "#2c4e51",
                   "&:hover": { backgroundColor: "#2c3e50" },
                 }}
               >
                 Add Details
               </Button>
+
               <Button
                 fullWidth
                 variant="outlined"
@@ -231,7 +185,7 @@ const ThoughtDetails = ({ token }) => {
                 sx={{ mt: 1 }}
                 onClick={handleDelete}
               >
-                Delete Thought
+                Delete Gratitude Message
               </Button>
             </Box>
           </Box>
@@ -251,36 +205,15 @@ const ThoughtDetails = ({ token }) => {
               }}
             >
               <Typography variant="h6">
-                <strong>Thought Name:</strong> {thought.thoughtName}
+                <strong>Gratitude Message:</strong> {message.message}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Created on: {new Date(thought.created_date).toLocaleString()}
+                Created on: {new Date(message.created_date).toLocaleString()}
               </Typography>
               <Box sx={{ textAlign: "left" }}>
-                {thought.Description && (
+                {message.details && (
                   <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Description:</strong> {thought.Description}
-                  </Typography>
-                )}
-                {thought.Emotions.length > 0 && (
-                  <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Emotions:</strong> {thought.Emotions.join(", ")}
-                  </Typography>
-                )}
-                {thought.Problems.length > 0 && (
-                  <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Problems:</strong> {thought.Problems.join(", ")}
-                  </Typography>
-                )}
-                {thought.possibleSolutions.length > 0 && (
-                  <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Possible Solutions:</strong>{" "}
-                    {thought.possibleSolutions.join(", ")}
-                  </Typography>
-                )}
-                {thought.Affirmation && (
-                  <Typography variant="body1" sx={{ mt: 2 }}>
-                    <strong>Affirmation:</strong> {thought.Affirmation}
+                    <strong>Detials:</strong> {message.details}
                   </Typography>
                 )}
               </Box>
@@ -292,4 +225,4 @@ const ThoughtDetails = ({ token }) => {
   );
 };
 
-export default ThoughtDetails;
+export default GratitudeDetails;

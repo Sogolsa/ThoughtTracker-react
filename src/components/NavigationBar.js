@@ -40,6 +40,7 @@ const NavigationBar = ({ userId, onLogout }) => {
   const menuItems = [
     { text: "Profile", link: `/users/me` },
     { text: "Thoughts", link: "/thoughts" },
+    { text: "Gratitude", link: "/gratitude" },
     { text: "Logout", action: handleLogout },
   ];
 
@@ -80,6 +81,20 @@ const NavigationBar = ({ userId, onLogout }) => {
             }}
           >
             Thoughts
+          </Button>
+          <Button
+            color="inherit"
+            component={Link}
+            to="/gratitude"
+            sx={{
+              // color: 'black',
+              fontWeight: isActive("/gratitude") ? "bold" : "normal",
+              borderBottom: isActive("/gratitude")
+                ? "2px solid salmon"
+                : "none",
+            }}
+          >
+            Gratitude
           </Button>
           <Button
             color="inherit"

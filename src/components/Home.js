@@ -9,6 +9,8 @@ import LoginView from "./LoginView";
 import ThoughtsView from "./ThoughtsView";
 import ThoughtDetails from "./ThoughtDetails";
 import ProfileView from "./ProfileView";
+import GratitudeView from "./GratitudeView";
+import GratitudeDetails from "./GratitudeDetails";
 
 const Home = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -17,6 +19,7 @@ const Home = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [thoughts, setThoughts] = useState([]);
+  const [gratitudeList, setGratitudeList] = useState([]);
 
   // Define the onLogout function
   const onLogout = () => {
@@ -46,11 +49,35 @@ const Home = () => {
             )
           }
         />
+        <Route
+          path="/gratitude"
+          element={
+            token ? (
+              <GratitudeView
+                token={token}
+                gratitudeList={gratitudeList}
+                setGratitudeList={setGratitudeList}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
         <Route path="/signup" element={<SignupView />} />
         <Route
           path="/thoughts/:thoughtId"
           element={
             token ? <ThoughtDetails token={token} /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/gratitude/:gratitudeId"
+          element={
+            token ? (
+              <GratitudeDetails token={token} />
+            ) : (
+              <Navigate to="/login" />
+            )
           }
         />
         <Route
