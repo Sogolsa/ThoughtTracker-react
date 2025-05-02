@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 import {
   TextField,
   Button,
@@ -89,16 +90,24 @@ const ProfileView = ({ user, setUser, token }) => {
       if (response.ok) {
         const updatedUser = await response.json();
         setUser(updatedUser);
-        alert("Profile updated successfully");
+        enqueueSnackbar("Profile updated successfully", {
+          variant: "success",
+        });
       } else if (response.status === 422) {
         const errorData = await response.json();
         // Extract and display error messages
         const errorMessages = errorData.errors
           .map((err) => `${err.path}: ${err.msg}`)
           .join("\n");
-        alert(`Validation failed:\n${errorMessages}`);
+        // alert(`Validation failed:\n${errorMessages}`);
+        enqueueSnackbar(`Validation failed:\n${errorMessages}`, {
+          variant: "error",
+        });
       } else {
-        alert("Failed to update profile");
+        // alert("Failed to update profile");
+        enqueueSnackbar("Failed to update profile", {
+          variant: "error",
+        });
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -118,11 +127,11 @@ const ProfileView = ({ user, setUser, token }) => {
       });
 
       if (response.ok) {
-        alert("Account deleted successfully");
+        enqueueSnackbar("Account deleted successfully", { variant: "success" });
         localStorage.clear();
         navigate("/signup");
       } else {
-        alert("Failed to delete account");
+        enqueueSnackbar("Failed to delete account", { variant: "error" });
       }
     } catch (error) {
       console.error("Error deleting account:", error);

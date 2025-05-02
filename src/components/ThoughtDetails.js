@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSnackbar } from "notistack";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   TextField,
@@ -9,6 +10,8 @@ import {
   Grid,
 } from "@mui/material";
 const ThoughtDetails = ({ token }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const { thoughtId } = useParams();
@@ -82,14 +85,13 @@ const ThoughtDetails = ({ token }) => {
         const updatedThought = await response.json();
         setThought(updatedThought);
         setShowDetails(true);
-
-        alert("Thought updated successfully");
-        // navigate("/thoughts");
+        enqueueSnackbar("Thought updated successfully", { variant: "success" });
       } else {
-        alert("Failed to update thought");
+        enqueueSnackbar("Failed to update thought", { variant: "error" });
       }
     } catch (error) {
       console.error("Error updating thought:", error);
+      enqueueSnackbar("Something went wrong", { variant: "error" });
     }
   };
 
@@ -103,13 +105,14 @@ const ThoughtDetails = ({ token }) => {
       });
 
       if (response.ok) {
-        alert("Thought deleted successfully");
+        enqueueSnackbar("Thought deleted successfully", { variant: "success" });
         navigate("/thoughts");
       } else {
-        alert("Failed to delete thought");
+        enqueueSnackbar("Failed to delete thought", { variant: "error" });
       }
     } catch (error) {
       console.error("Error deleting thought:", error);
+      enqueueSnackbar("Something went wrong", { variant: "error" });
     }
   };
 

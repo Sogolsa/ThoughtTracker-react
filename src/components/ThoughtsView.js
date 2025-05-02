@@ -73,8 +73,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
         padding: 3,
         margin: "0 auto", // Centers the box horizontally
         textAlign: "center",
-        // display: "flex",
-        // flexDirection: "column",
+
         alignItems: "flex-start",
         justifyContent: "space-around",
       }}

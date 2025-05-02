@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 import {
   TextField,
   Button,
@@ -41,18 +42,26 @@ const SignupView = ({ setUser }) => {
       });
 
       if (response.ok) {
-        alert("Signup successful");
+        enqueueSnackbar("Signup successful", { variant: "success" });
         navigate("/login");
       } else if (response.status === 409) {
         const errorData = await response.json();
-        alert(`Signup failed: ${errorData.message}`);
+        enqueueSnackbar(
+          `Signup failed: ${errorData.message || "Unknown error"}`,
+          { variant: "error" }
+        );
       } else {
         const errorData = await response.json();
-        alert(`Signup failed: ${errorData.message || "Unknown error"}`);
+        enqueueSnackbar(
+          `Signup failed: ${errorData.message || "Unknown error"}`,
+          { variant: "error" }
+        );
       }
     } catch (error) {
       console.error("Error during signup:", error);
-      alert("An error occurred during signup. Please try again.");
+      enqueueSnackbar("An error occurred during signup. Please try again.", {
+        variant: "error",
+      });
     }
   };
 

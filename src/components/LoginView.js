@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 import {
   TextField,
   Button,
@@ -49,17 +50,23 @@ const LoginView = ({ onLoggedIn }) => {
           localStorage.setItem("token", data.token);
           onLoggedIn(data.user, data.token);
           navigate("/thoughts");
+          enqueueSnackbar("Login successful", { variant: "success" });
         } else {
-          alert("No such user");
+          enqueueSnackbar("No such user", { variant: "error" });
         }
       } else {
         // Handle non-OK response
         const errorData = await response.json();
-        alert(`Login failed: ${errorData.message || "Unknown error"}`);
+        enqueueSnackbar(
+          `Login failed: ${errorData.message || "Unknown error"}`,
+          { variant: "error" }
+        );
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Something went wrong. Please try again.");
+      enqueueSnackbar("An error occurred during login. Please try again.", {
+        variant: "error",
+      });
     }
   };
 
