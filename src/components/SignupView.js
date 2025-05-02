@@ -32,6 +32,16 @@ const SignupView = ({ setUser }) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+    if (!passwordRegex.test(formData.Password)) {
+      enqueueSnackbar(
+        "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.",
+        { variant: "warning" }
+      );
+      return;
+    }
+
     try {
       const response = await fetch(`${API_URL}/users`, {
         method: "POST",
