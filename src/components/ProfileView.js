@@ -236,36 +236,30 @@ const ProfileView = ({ user, setUser, token }) => {
             variant="filled"
             type="password"
           />
-          <Grid
-            container
-            spacing={1}
-            sx={{ mt: 2, justifyContent: "flex-end" }}
+
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{
+              mt: 2,
+              backgroundColor: "#2c4e51",
+              "&:hover": { backgroundColor: "#2c3e50" },
+            }}
           >
-            <Grid item>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{
-                  mt: 2,
-                  backgroundColor: "#2c4e51",
-                  "&:hover": { backgroundColor: "#2c3e50" },
-                }}
-              >
-                Update Profile
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="error"
-                sx={{ mt: 2 }}
-                onClick={handleDelete}
-              >
-                Delete Account
-              </Button>
-            </Grid>
-          </Grid>
+            Update Profile
+          </Button>
+
+          <Button
+            fullWidth
+            variant="outlined"
+            color="error"
+            sx={{ mt: 1 }}
+            onClick={handleDelete}
+          >
+            Delete Account
+          </Button>
         </Box>
       </Box>
     </Container>
