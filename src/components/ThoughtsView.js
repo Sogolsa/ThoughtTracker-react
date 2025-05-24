@@ -9,6 +9,10 @@ import {
   CardContent,
   CardActions,
   Grid,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
 } from "@mui/material";
 
 import { Link } from "react-router-dom";
@@ -18,6 +22,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
   const [newThought, setNewThought] = useState(""); // New thought name
+  const [sortOrder, setSortOrder] = useState("order-added");
 
   // Fetch thoughts when the component mounts
   useEffect(() => {
@@ -36,6 +41,19 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
         console.error("Error fetching thoughts:", error);
       });
   }, [token]);
+
+  // sorting based on date created
+  const sortedThoughts = [...thoughts];
+
+  if (sortOrder === "date-asc") {
+    sortedThoughts.sort(
+      (a, b) => new Date(a.created_date) - new Date(b.created_date)
+    );
+  } else if (sortOrder === "date-dsc") {
+    sortedThoughts.sort(
+      (a, b) => new Date(b.created_date) - new Date(a.created_date)
+    );
+  }
 
   // Handle form submission to add a new thought
   const handleSubmit = (e) => {
@@ -121,7 +139,6 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
               variant="contained"
               color="primary"
               sx={{
-                // mt: 3,
                 mb: 2,
                 // backgroundColor: '#2c4e51',
                 backgroundColor: "#194d5c",
@@ -138,7 +155,30 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
 
       {/* List of thoughts */}
       <Grid item xs={12} sm={6} md={4} sx={{ paddingTop: 4 }}>
-        <Typography variant="h6" gutterBottom sx={{ mb: 0 }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <FormControl
+            size="small"
+            sx={{
+              width: "33%",
+            }}
+          >
+            <InputLabel id="sort-order-label">Sort order</InputLabel>
+            <Select
+              labelId="sort-order-label"
+              id="sort-order"
+              value={sortOrder}
+              label="Sort Order"
+              onChange={(event) => {
+                setSortOrder(event.target.value);
+              }}
+            >
+              {/* <MenuItem value="order-added">Order added</MenuItem> */}
+              <MenuItem value="date-asc">Date Ascending</MenuItem>
+              <MenuItem value="date-dsc">Date Decending</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Typography variant="h6" gutterBottom sx={{ mb: 0, mt: 3 }}>
           Your Thoughts List
         </Typography>
         <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
@@ -146,7 +186,7 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
         </Typography>
         {thoughts.length > 0 ? (
           <Box display="flex" flexDirection="column" gap={1}>
-            {thoughts.map((thought) => (
+            {sortedThoughts.map((thought) => (
               <Card
                 key={thought._id}
                 sx={{
@@ -163,8 +203,6 @@ const ThoughtsView = ({ token, thoughts, setThoughts }) => {
                     size="small"
                     component={Link}
                     to={`/thoughts/${thought._id}`}
-                    // variant="outlined"
-                    // color="black"
                     sx={{
                       mb: 2,
 
